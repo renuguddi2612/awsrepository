@@ -5,16 +5,11 @@ def lambda_handler(event, context):
 
     s3 = boto3.client('s3')
 
-    bucket_name = "my-lambda-bucket"
+    bucket_name = "lambda-demo-bucket-987654321"
 
-    response = s3.create_bucket(
-        Bucket=bucket_name,
-        CreateBucketConfiguration={
-            'LocationConstraint': 'us-east-1'
-        }
-    )
+    s3.create_bucket(Bucket=bucket_name)
 
     return {
         'statusCode': 200,
-        'body': json.dumps(f"Bucket {bucket_name} created successfully")
+        'body': json.dumps("Bucket created successfully")
     }
