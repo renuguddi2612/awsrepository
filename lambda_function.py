@@ -1,16 +1,20 @@
 import json
-import urllib.request
+import boto3
 
 def lambda_handler(event, context):
 
-    url = "https://api.example.com/data"
+    s3 = boto3.client('s3')
 
-    response = urllib.request.urlopen(url)
-    data = json.loads(response.read())
+    bucket_name = "my-lambda-bucket-123456"
 
-    print(data)
+    response = s3.create_bucket(
+        Bucket=bucket_name,
+        CreateBucketConfiguration={
+            'LocationConstraint': 'ap-south-1'
+        }
+    )
 
     return {
         'statusCode': 200,
-        'body': json.dumps(data)
+        'body': json.dumps(f"Bucket {bucket_name} created successfully")
     }
