@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     response = s3.create_bucket(
         Bucket=bucket_name,
         CreateBucketConfiguration={
-            'LocationConstraint': 'ap-south-1'
+            'LocationConstraint': 'us-east-1'
         }
     )
 
